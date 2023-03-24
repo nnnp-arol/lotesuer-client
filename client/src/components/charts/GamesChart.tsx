@@ -1,7 +1,15 @@
 import ReactApexChart from "react-apexcharts";
+import React from "react";
+import { ApexOptions } from "apexcharts";
 
-export const GamesChart = ({ series }) => {
-  const chart = {
+type gamesChartPropType = {
+  series: any[];
+};
+
+export const GamesChart: (props: gamesChartPropType) => JSX.Element = ({
+  series,
+}) => {
+  const options: ApexOptions = {
     stroke: {
       show: false,
       curve: "smooth",
@@ -22,7 +30,7 @@ export const GamesChart = ({ series }) => {
               fontWeight: 600,
               color: "#E2C43F",
               offsetY: -10,
-              formatter: function (val) {
+              formatter: function (val: any) {
                 return val;
               },
             },
@@ -33,7 +41,7 @@ export const GamesChart = ({ series }) => {
               fontWeight: 400,
               color: "#E2C43F",
               offsetY: 6,
-              formatter: function (val) {
+              formatter: function (val: any) {
                 return `$ ${parseFloat(val).toFixed(2)}`;
               },
             },
@@ -58,8 +66,8 @@ export const GamesChart = ({ series }) => {
       },
       enabled: true,
       textAnchor: "end",
-      formatter: (value, { seriesIndex, dataPointIndex, w }) => {
-        return w.config.series[seriesIndex].toFixed(2);
+      formatter: (val, opt) => {
+        return opt.w.config.series[opt.seriesIndex].toFixed(2);
       },
     },
     fill: {
@@ -120,5 +128,5 @@ export const GamesChart = ({ series }) => {
     },
   };
 
-  return <ReactApexChart options={chart} series={series} type="donut" />;
+  return <ReactApexChart options={options} series={series} type="donut" />;
 };

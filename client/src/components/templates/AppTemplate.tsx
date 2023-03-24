@@ -1,7 +1,7 @@
 import React, { ReactNode, useEffect, useState } from "react";
 import { motion, useAnimationControls } from "framer-motion";
 import { Nav } from "./Nav";
-import { AppTemplateType, RenderScreenTitleType } from "../../models/types";
+import { AppTemplateType } from "../../models/types";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import PointOfSaleIcon from "@mui/icons-material/PointOfSale";

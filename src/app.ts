@@ -5,15 +5,14 @@ import * as trpcExpress from "@trpc/server/adapters/express";
 import { router, createContext } from "./trpc";
 import { sellersRouter } from "./routes/seller";
 import { salesRouter } from "./routes/sales";
-import { allSalesRouter } from "./routes/allSales.routes";
 import cors from "cors";
+import path from "path";
 
 const app = express();
 
 const appRouter = router({
   seller: sellersRouter,
   sale: salesRouter,
-  allSales: allSalesRouter,
 });
 
 app.use(cors());
@@ -26,6 +25,8 @@ app.use(
     createContext,
   })
 );
+
+app.use(express.static(path.join(__dirname, "../client/dist")));
 
 export type AppRouter = typeof appRouter;
 

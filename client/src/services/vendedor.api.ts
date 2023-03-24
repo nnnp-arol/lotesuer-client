@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const createSeller = async (nuevoVendedor) => {
+export const createSeller = async (nuevoVendedor: any) => {
   await axios.post("http://localhost:4100/vendedor", nuevoVendedor);
 };
 

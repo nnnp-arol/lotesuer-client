@@ -1,6 +1,5 @@
 import { Prop, modelOptions, getModelForClass } from "@typegoose/typegoose";
-import { Date } from "mongoose";
-import { date, Schema, ZodDate } from "zod";
+import { Schema, ZodDate } from "zod";
 
 @modelOptions({
   schemaOptions: {
