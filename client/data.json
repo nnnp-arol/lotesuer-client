@@ -1,0 +1,106 @@
+{
+  "sales": [
+    {
+      "_id": "d01",
+      "date": "19/02/2023",
+      "seller": {
+        "_id": "s01",
+        "name": "carlos",
+        "last_name": "sanchez",
+        "dni": "1234",
+        "phone": "3804123123",
+        "percent": {
+          "quiniela": 15,
+          "quini6": 15,
+          "loto": 15,
+          "brinco": 15,
+          "express": 15,
+          "poceada": 15,
+          "telekino": 15,
+          "telebingo": 15,
+          "super15": 15,
+          "otro": 15
+        }
+      },
+      "quiniela": "235.00",
+      "quini6": "350.00",
+      "loto": "820.00",
+      "loto5": "350.00",
+      "brinco": "0.00",
+      "poceada": "1500.00",
+      "express": "2000.00",
+      "premios": "3500.00",
+      "total": "1755.00",
+      "paga": "1500.00",
+      "saldo": "255.00"
+    },
+    {
+      "_id": "d02",
+      "date": "19/02/2023",
+      "seller": {
+        "_id": "s02",
+        "name": "martin",
+        "last_name": "salazar",
+        "dni": "63456346",
+        "phone": "380487684576",
+        "percent": {
+          "quiniela": 15,
+          "quini6": 15,
+          "loto": 15,
+          "brinco": 15,
+          "express": 15,
+          "poceada": 15,
+          "telekino": 15,
+          "telebingo": 15,
+          "super15": 15,
+          "otro": 15
+        }
+      },
+      "quiniela": "135.00",
+      "quini6": "250.00",
+      "loto": "720.00",
+      "loto5": "250.00",
+      "brinco": "0.00",
+      "poceada": "1400.00",
+      "express": "1900.00",
+      "premios": "300.00",
+      "total": "4355.00",
+      "paga": "0.00",
+      "saldo": "4355.00"
+    },
+    {
+      "_id": "d03",
+      "date": "19/02/2023",
+      "seller": {
+        "_id": "s03",
+        "name": "ricardo",
+        "last_name": "bermudez",
+        "dni": "9745543",
+        "phone": "3802645872",
+        "percent": {
+          "quiniela": 20,
+          "quini6": 15,
+          "loto": 20,
+          "brinco": 15,
+          "express": 15,
+          "poceada": 20,
+          "telekino": 15,
+          "telebingo": 15,
+          "super15": 10,
+          "otro": 15
+        }
+      },
+      "quiniela": "100.00",
+      "quini6": "200.00",
+      "loto": "700.00",
+      "loto5": "200.00",
+      "brinco": "100.00",
+      "poceada": "100.00",
+      "express": "900.00",
+      "premios": "1500.00",
+      "total": "800.00",
+      "paga": "800.00",
+      "saldo": "0.00"
+    }
+  ]
+}
