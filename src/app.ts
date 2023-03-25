@@ -7,6 +7,7 @@ import { sellersRouter } from "./routes/seller";
 import { salesRouter } from "./routes/sales";
 import cors from "cors";
 import path from "path";
+import favicon from "express-favicon";
 
 const app = express();
 
@@ -14,6 +15,8 @@ const appRouter = router({
   seller: sellersRouter,
   sale: salesRouter,
 });
+
+app.use(favicon(__dirname + "../client/public/lol.svg"));
 
 app.use(cors());
 app.use(morgan("dev"));
