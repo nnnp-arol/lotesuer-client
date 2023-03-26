@@ -8,7 +8,7 @@
     "start": "node dist/index.js",
     "publish-back": "tsc",
     "publish-front": "npm run build --prefix client",
-    "build": "npm run publish-back && npm i --prefix client && npm run publish-front"
+    "build": "npm run publish-back"
   },
   "keywords": [],
   "author": "",
