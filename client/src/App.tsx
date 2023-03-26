@@ -6,7 +6,7 @@ import AppRoutes from "./routes/AppRoutes";
 import { AppTemplate } from "./components/templates/AppTemplate";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
-import { URL } from "./config";
+// import { URL } from "./config";
 function App() {
   const [queryClient] = useState(() => new QueryClient());
   const [trpcClient] = useState(() => {
@@ -14,8 +14,8 @@ function App() {
       links: [
         httpBatchLink({
           // url: "http://localhost:3000/trpc",
-          // url: "/trpc",
-          url: URL,
+          url: "/trpc",
+          // url: URL,
         }),
       ],
     });
