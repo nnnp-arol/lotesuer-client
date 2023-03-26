@@ -15,8 +15,9 @@ function App() {
       links: [
         httpBatchLink({
           // url: "http://localhost:3000/trpc",
+          url: "https://lotesuer-client.vercel.app/trpc",
           // url: "/trpc",
-          url: URL,
+          // url: URL,
         }),
       ],
     });
