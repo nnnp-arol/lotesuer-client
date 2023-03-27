@@ -17,8 +17,7 @@
     "jsx": "react-jsx",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "strictPropertyInitialization": false,
-    "outDir": "../dist"
+    "strictPropertyInitialization": false
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

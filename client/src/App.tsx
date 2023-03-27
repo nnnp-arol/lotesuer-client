@@ -1,5 +1,5 @@
-import { config } from "dotenv";
-config();
+// import { config } from "dotenv";
+// config();
 import { trpc } from "./utils/trpc";
 import { httpBatchLink } from "@trpc/client";
 import { useState } from "react";
@@ -17,8 +17,8 @@ function App() {
       links: [
         httpBatchLink({
           // url: "http://localhost:3000/trpc",
-          url: "https://lotesuer-client.vercel.app/trpc",
-          // url: "/trpc",
+          // url: "https://lotesuer-client.vercel.app/trpc",
+          url: "/trpc",
           // url: URL,
         }),
       ],
