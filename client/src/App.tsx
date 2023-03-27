@@ -1,3 +1,5 @@
+import { config } from "dotenv";
+config();
 import { trpc } from "./utils/trpc";
 import { httpBatchLink } from "@trpc/client";
 import { useState } from "react";
