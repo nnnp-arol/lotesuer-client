@@ -1,3 +1,5 @@
+import { config } from "dotenv";
+config();
 import mongoose from "mongoose";
 import { MONGODB_URI } from "./config";
 
