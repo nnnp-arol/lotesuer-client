@@ -7,6 +7,7 @@ import {
   StyleSheet,
 } from "@react-pdf/renderer";
 import moment from "moment";
+import { Sale } from "../../utils/interfaces";
 
 const styles = StyleSheet.create({
   container: {
@@ -25,11 +26,6 @@ const styles = StyleSheet.create({
   header: {
     marginTop: 30,
   },
-  headerTitle: {
-    marginTop: 60,
-    fontSize: 24,
-    fontWeight: "100",
-  },
   pin: {
     marginTop: 10,
     fontSize: 20,
@@ -41,20 +37,8 @@ const styles = StyleSheet.create({
     width: 64,
     height: 64,
   },
-  bodyTitle: {
-    marginTop: 20,
-    fontSize: 20,
-    fontWeight: "700",
-    textAlign: "center",
-  },
   contBodyText: {
     width: 300,
-  },
-  bodyText: {
-    marginTop: 7,
-    fontSize: 12,
-    fontWeight: "400",
-    textAlign: "center",
   },
   cont2: {
     width: 590,
@@ -78,10 +62,34 @@ const styles = StyleSheet.create({
   },
 });
 
-function PdfComponent({ data, startDate, endDate }) {
-  console.log(startDate);
-  console.log(endDate);
-  const HeadTh = ({ text, flx = 0.2, algn = "center" }) => {
+type HeadThPropsType = {
+  text: string;
+  flx?: number | undefined;
+  algn?: string | undefined;
+};
+
+type BodyTdPropsType = {
+  algn?: string;
+  text: string;
+  flx?: number;
+};
+
+type PdfComponentPropsType = {
+  data: Sale[] | undefined;
+  startDate: string;
+  endDate: string;
+};
+
+export const PdfComponent: (props: PdfComponentPropsType) => JSX.Element = ({
+  data,
+  startDate,
+  endDate,
+}) => {
+  const HeadTh: (props: HeadThPropsType) => JSX.Element = ({
+    text,
+    flx = 0.2,
+    algn = "center",
+  }) => {
     return (
       <View
         style={{
@@ -89,12 +97,28 @@ function PdfComponent({ data, startDate, endDate }) {
           height: 10,
         }}
       >
-        <Text style={{ textAlign: algn, fontWeight: "heavy" }}>{text}</Text>
+        <Text
+          style={{
+            textAlign:
+              algn === "center"
+                ? "center"
+                : algn === "right"
+                ? "right"
+                : "left",
+            fontWeight: "heavy",
+          }}
+        >
+          {text}
+        </Text>
       </View>
     );
   };
 
-  const BodyTd = ({ text, index, flx = 0.2, algn = "center" }) => {
+  const BodyTd: (props: BodyTdPropsType) => JSX.Element = ({
+    text,
+    flx = 0.2,
+    algn = "center",
+  }) => {
     return (
       <View
         style={{
@@ -102,7 +126,18 @@ function PdfComponent({ data, startDate, endDate }) {
           color: "black",
         }}
       >
-        <Text style={{ textAlign: algn }}>{text}</Text>
+        <Text
+          style={{
+            textAlign:
+              algn === "center"
+                ? "center"
+                : algn === "right"
+                ? "right"
+                : "left",
+          }}
+        >
+          {text}
+        </Text>
       </View>
     );
   };
@@ -205,30 +240,21 @@ function PdfComponent({ data, startDate, endDate }) {
                       >
                         <BodyTd
                           text={moment(sale.date).format("DD-MM-YYYY")}
-                          index={index}
                           flx={0.3}
                           algn="left"
                         />
-                        <BodyTd
-                          text={sale.seller.id_seller}
-                          index={index}
-                          algn="left"
-                        />
-                        <BodyTd text={sale.games.quiniela} index={index} />
-                        <BodyTd text={sale.games.quini6} index={index} />
-                        <BodyTd text={sale.games.loto} index={index} />
-                        <BodyTd text={sale.games.loto5} index={index} />
-                        <BodyTd text={sale.games.brinco} index={index} />
-                        <BodyTd text={sale.games.poceada} index={index} />
-                        <BodyTd text={sale.games.express} index={index} />
-                        <BodyTd text={sale.totals.premios} index={index} />
-                        <BodyTd text={sale.totals.total} index={index} />
-                        <BodyTd text={sale.totals.paga} index={index} />
-                        <BodyTd
-                          text={sale.totals.saldo}
-                          index={index}
-                          algn="right"
-                        />
+                        <BodyTd text={sale.seller.id_seller} algn="left" />
+                        <BodyTd text={sale.games.quiniela} />
+                        <BodyTd text={sale.games.quini6} />
+                        <BodyTd text={sale.games.loto} />
+                        <BodyTd text={sale.games.loto5} />
+                        <BodyTd text={sale.games.brinco} />
+                        <BodyTd text={sale.games.poceada} />
+                        <BodyTd text={sale.games.express} />
+                        <BodyTd text={sale.totals.premios} />
+                        <BodyTd text={sale.totals.total} />
+                        <BodyTd text={sale.totals.paga} />
+                        <BodyTd text={sale.totals.saldo} algn="right" />
                       </View>
                     ))
                   : null}
@@ -239,6 +265,4 @@ function PdfComponent({ data, startDate, endDate }) {
       </Page>
     </Document>
   );
-}
-
-export default PdfComponent;
+};

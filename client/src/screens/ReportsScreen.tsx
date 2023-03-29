@@ -9,7 +9,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { PDFViewer, PDFDownloadLink } from "@react-pdf/renderer";
-import PdfComponent from "../components/templates/PdfComponent";
+import { PdfComponent } from "../components/templates/PdfComponent";
 
 export const ReportsScreen = () => {
   const [startDate, setStartDate] = useState(moment().format("YYYY-MM-DD"));
@@ -29,12 +29,12 @@ export const ReportsScreen = () => {
   });
   const [printMode, setPrintMode] = useState(false);
 
-  const { data: incommingSellers } = trpc.seller.get.useQuery();
+  const { data: incommingSellers }: UseQueryResult<Seller[] | undefined> =
+    trpc.seller.get.useQuery();
 
   const {
     data: incommingSalesByRange,
     isLoading,
-    isFetching,
   }: UseQueryResult<Sale[] | undefined> = trpc.sale.getSaleByRange.useQuery(
     {
       // start: moment(startDate).format("YYYY-MM-DD"),
@@ -89,7 +89,7 @@ export const ReportsScreen = () => {
             disabled={inputsOrder.start}
             format="DD-MM-YYYY"
             value={moment(startDate)}
-            onChange={(e) => {
+            onChange={(e: any) => {
               setStartDate(e.format("YYYY-MM-DD"));
               setInputsOrder({ ...inputsOrder, start: true, end: false });
             }}
@@ -103,7 +103,7 @@ export const ReportsScreen = () => {
             disabled={inputsOrder.end}
             format="DD-MM-YYYY"
             value={moment(endDate)}
-            onChange={(e) => {
+            onChange={(e: any) => {
               setEndDate(e.format("YYYY-MM-DD"));
               setInputsOrder({ ...inputsOrder, end: true, seller: false });
             }}

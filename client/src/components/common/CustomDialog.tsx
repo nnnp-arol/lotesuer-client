@@ -4,7 +4,18 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Button from "@mui/material/Button";
-export const CustomDialog = ({
+
+type CustomDialogPropsType = {
+  open: boolean;
+  handleClose: () => void;
+  title: string;
+  text: string;
+  onConfirm: () => void;
+  onCancel: () => void;
+  tref: any;
+};
+
+export const CustomDialog: (props: CustomDialogPropsType) => JSX.Element = ({
   open,
   handleClose,
   title,

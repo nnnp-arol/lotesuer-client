@@ -3,11 +3,23 @@ import { useEffect, useState } from "react";
 import { trpc } from "../utils/trpc";
 import { helperFunctions } from "../utils/helperFunctions";
 import { UseQueryResult } from "@tanstack/react-query";
-import { Sale } from "../utils/interfaces";
+import { Sale, Seller } from "../utils/interfaces";
 import ReactApexChart from "react-apexcharts";
 import { MonthSalesChart } from "../components/charts/MonthSalesChart";
 import { GamesChart } from "../components/charts/GamesChart";
 import { DebtSellersChart } from "../components/charts/DebtSellersChart";
+
+type SalesWithDebtType = {
+  seller: Seller;
+  debt: number;
+};
+type MonthSalesType = {
+  date: string;
+  paga: number;
+  premios: number;
+  saldo: number;
+  total: number;
+};
 
 function Home() {
   const [range] = useState({
@@ -38,20 +50,22 @@ function Home() {
       seller: "",
     });
 
-  const { data: salesWithDebts }: UseQueryResult<Sale[] | undefined> =
+  const {
+    data: salesWithDebts,
+  }: UseQueryResult<SalesWithDebtType[] | undefined> =
     trpc.sale.getSalesWithDebts.useQuery({
       start: range.start,
       end: range.end,
     });
 
-  const { data: monthSales }: UseQueryResult<Sale[] | undefined> =
+  const { data: monthSales }: UseQueryResult<MonthSalesType[] | undefined> =
     trpc.sale.getAllMonthSales.useQuery({
       start: range.start,
       end: range.end,
     });
 
   useEffect(() => {
-    console.log(salesWithDebts);
+    console.log(monthSales);
     if (data?.length) {
       const {
         ventaTotal,

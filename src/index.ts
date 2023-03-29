@@ -1,7 +1,11 @@
+import { config } from "dotenv";
+config();
 import app from "./app";
 import { dbConnect } from "./db";
 
-dbConnect();
-app.listen(3000);
+const PORT = process.env.PORT || 4000;
 
-console.log("server on port", 3000);
+dbConnect();
+app.listen(PORT);
+
+console.log("server on port", PORT);

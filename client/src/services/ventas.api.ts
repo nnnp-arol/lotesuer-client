@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const createSale = async (nuevaVenta) => {
+export const createSale = async (nuevaVenta: any) => {
   await axios.post("http://localhost:4100/venta", nuevaVenta);
 };
 
@@ -13,7 +13,7 @@ export const getSales = async () => {
 };
 
 //#region [1]
-export const getSalesByDateAndSeller = async (obj) => {
+export const getSalesByDateAndSeller = async (obj: any) => {
   const response = await axios.get(
     `http://localhost:4100/venta-fecha-vendedor/${obj.fecha}/${obj.vendedor}`
   );
@@ -24,7 +24,8 @@ export const getSalesByDateAndSeller = async (obj) => {
 };
 //#endregion
 
-export const updateSale = async (id, sale) => {
+export const updateSale = async (props: any) => {
+  const { id, sale } = props;
   const response = await axios.put(`http://localhost:4100/venta/${id}`, sale);
   if (response) {
     return response.data;

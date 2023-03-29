@@ -16,6 +16,7 @@ function SellerCard({ seller }: Props) {
     quiniela: "",
     quini6: "",
     loto: "",
+    loto5: "",
     brinco: "",
     express: "",
     poceada: "",
@@ -23,6 +24,7 @@ function SellerCard({ seller }: Props) {
     telebingo: "",
     super15: "",
     otro: "",
+    machineRent: "",
   });
 
   useEffect(() => {
