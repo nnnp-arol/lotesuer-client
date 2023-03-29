@@ -3,7 +3,9 @@ config();
 import app from "./app";
 import { dbConnect } from "./db";
 
-dbConnect();
-app.listen(process.env.PORT);
+const PORT = process.env.PORT || 4000;
 
-console.log("server on port", process.env.PORT);
+dbConnect();
+app.listen(PORT);
+
+console.log("server on port", PORT);

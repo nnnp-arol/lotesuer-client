@@ -10,6 +10,8 @@ import { boolean } from "zod";
 class Seller {
   @Prop({ type: String })
   id_seller: string;
+  @Prop({ type: String })
+  machine_number: string;
 
   @Prop({ type: String })
   name: string;

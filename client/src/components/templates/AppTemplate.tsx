@@ -5,6 +5,7 @@ import { AppTemplateType } from "../../models/types";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
+import TextSnippetOutlinedIcon from "@mui/icons-material/TextSnippetOutlined";
 
 export const AppTemplate: React.FC<AppTemplateType> = ({ children }) => {
   const [selectedScreen, setselectedScreen] = useState<string>("home");
@@ -19,6 +20,15 @@ export const AppTemplate: React.FC<AppTemplateType> = ({ children }) => {
     }
     if (selectedScreen === "ventas") {
       return <PointOfSaleIcon color="inherit" className={classname} />;
+    }
+    if (selectedScreen === "quiniela") {
+      return <PointOfSaleIcon color="inherit" className={classname} />;
+    }
+    if (selectedScreen === "bingos") {
+      return <PointOfSaleIcon color="inherit" className={classname} />;
+    }
+    if (selectedScreen === "informes") {
+      return <TextSnippetOutlinedIcon color="inherit" className={classname} />;
     }
   };
 
@@ -39,7 +49,15 @@ export const AppTemplate: React.FC<AppTemplateType> = ({ children }) => {
         className="flex flex-row items-center gap-6 justify-center flex-1"
       >
         {RenderIcon()}
-        <h1 className="text-3xl text-white">{selectedScreen}</h1>
+        {selectedScreen === "quiniela" || selectedScreen === "bingos" ? (
+          <div className="flex flex-row justify-center items-center">
+            <h1 className="text-3xl text-white">Ventas</h1>
+            <h1 className="text-3xl text-white mx-5">/</h1>
+            <h1 className="text-2xl text-slate-500">{selectedScreen}</h1>
+          </div>
+        ) : (
+          <h1 className="text-3xl text-white">{selectedScreen} </h1>
+        )}
       </motion.div>
     );
   };

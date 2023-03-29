@@ -28,7 +28,7 @@ function SellerForm() {
   return (
     <div className="flex w-1/4 h-screen items-start justify-center mx-10">
       <div className="fixed">
-        <h1 className="text-5xl font-bold text-center py-5">Add new</h1>
+        <h1 className="text-2xl font-bold text-center py-5">nuevo vendedor</h1>
         <form onSubmit={handleSubmit} className="bg-zinc-900 p-10 rounded-md">
           <input
             type="text"
