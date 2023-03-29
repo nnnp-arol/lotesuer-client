@@ -1,15 +1,13 @@
-import { useEffect, useMemo, useState } from "react";
-import { SalesSellersList } from "../components/sales/SalesSellersList";
-import { Sale, Seller } from "../utils/interfaces";
+import { useState } from "react";
+import { Seller } from "../utils/interfaces";
 import { trpc } from "../utils/trpc";
 import { UseQueryResult } from "@tanstack/react-query";
-import { helperFunctions } from "../utils/helperFunctions";
-import ArrowBackIosNewOutlinedIcon from "@mui/icons-material/ArrowBackIosNewOutlined";
-import moment from "moment";
 
 export const BingosScreen = () => {
-  const [selectedSeller, setSelectedSeller] = useState(null);
-  const { data } = trpc.seller.get.useQuery();
+  const [selectedSeller, setSelectedSeller] = useState<Seller | null>(null);
+
+  const { data }: UseQueryResult<Seller[] | undefined> =
+    trpc.seller.get.useQuery();
   console.log(data);
 
   return (
@@ -59,17 +57,6 @@ export const BingosScreen = () => {
           <button className="w-32 py-2 text-md text-red-500 flex-1">
             agregar nuevo concurso
           </button>
-          {/* <input
-            type="text"
-            className={styles.dateEnabled}
-            onClick={(e) => {
-              e.currentTarget.value = "";
-            }}
-            onChange={(e) => {
-              setDate(e.currentTarget.value);
-              setDateLoaded(true);
-            }}
-          /> */}
         </div>
         <div className="flex flex-1 bg-slate-800 flex-col gap-5">
           <div className="w-full bg-slate-500 justify-center items-center flex h-10">
@@ -78,7 +65,7 @@ export const BingosScreen = () => {
           <div className="flex w-full">
             <ul className="flex flex-col w-full">
               {data &&
-                data.map((item) => (
+                data.map((item: any) => (
                   <li
                     className={`w-full justify-center items-center flex py-1 px-5 ${
                       selectedSeller?._id === item._id ? "bg-slate-900" : null
