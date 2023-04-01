@@ -72,3 +72,30 @@ export interface GamesFields {
   saldo: string;
   machineRent: boolean;
 }
+
+export interface Bingo {
+  _id?: string;
+  contest_date: string;
+  contest_number: string;
+  price: string;
+  game: string;
+  cards: string;
+  returned_cards: string;
+  dealt_cards: string;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface BingoSale {
+  _id?: string;
+  bingo?: string;
+  seller?: string;
+  deliver_date?: string;
+  balance: string;
+  contest_number: string;
+  delivered_cards: string;
+  returned_cards: string;
+  sold: string;
+  createdAt?: string;
+  updatedAt?: string;
+}
