@@ -5,6 +5,8 @@ import * as trpcExpress from "@trpc/server/adapters/express";
 import { router, createContext } from "./trpc";
 import { sellersRouter } from "./routes/seller";
 import { salesRouter } from "./routes/sales";
+import { bingoSalesRouter } from "./routes/bingoSales";
+import { bingoRouter } from "./routes/bingo";
 import cors from "cors";
 import path from "path";
 import favicon from "express-favicon";
@@ -14,6 +16,8 @@ const app = express();
 const appRouter = router({
   seller: sellersRouter,
   sale: salesRouter,
+  bingoSale: bingoSalesRouter,
+  bingo: bingoRouter,
 });
 
 app.use(favicon(__dirname + "../client/public/lol.svg"));

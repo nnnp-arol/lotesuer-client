@@ -9,20 +9,18 @@ type CustomDialogPropsType = {
   open: boolean;
   handleClose: () => void;
   title: string;
-  text: string;
-  onConfirm: () => void;
-  onCancel: () => void;
-  tref: any;
+  onConfirm?: () => void;
+  onCancel?: () => void;
+  bodyContent: JSX.Element;
 };
 
 export const CustomDialog: (props: CustomDialogPropsType) => JSX.Element = ({
   open,
   handleClose,
   title,
-  text,
   onConfirm,
   onCancel,
-  tref,
+  bodyContent,
 }) => {
   return (
     <Dialog
@@ -34,17 +32,19 @@ export const CustomDialog: (props: CustomDialogPropsType) => JSX.Element = ({
         "& .MuiPaper-root": { backgroundColor: "grey" },
       }}
     >
-      <DialogTitle>{title}</DialogTitle>
-      <DialogContent>
-        {text ? <DialogContentText>{text}</DialogContentText> : null}
+      <DialogTitle className="text-center">{title}</DialogTitle>
+      <DialogContent className="w-80 flex flex-col justify-center items-center flex-1">
+        {bodyContent}
       </DialogContent>
-      <DialogActions>
-        <Button onClick={onConfirm} variant="contained" ref={tref}>
-          Aceptar
-        </Button>
-        <Button onClick={onCancel} variant="contained">
-          Cancelar
-        </Button>
+      <DialogActions className="">
+        <div className="flex flex-col flex-1 gap-4 px-5">
+          <Button onClick={onConfirm} variant="contained">
+            Aceptar
+          </Button>
+          <Button onClick={onCancel} variant="contained">
+            Cancelar
+          </Button>
+        </div>
       </DialogActions>
     </Dialog>
   );

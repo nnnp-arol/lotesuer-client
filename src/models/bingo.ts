@@ -18,6 +18,10 @@ class Bingo {
   game: string;
   @Prop({ type: String })
   cards: string;
+  @Prop({ type: String })
+  returned_cards: string;
+  @Prop({ type: String })
+  dealt_cards: string;
 }
 
 export default getModelForClass(Bingo);
