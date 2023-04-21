@@ -9,6 +9,35 @@ import { MonthSalesChart } from "../components/charts/MonthSalesChart";
 import { GamesChart } from "../components/charts/GamesChart";
 import { DebtSellersChart } from "../components/charts/DebtSellersChart";
 
+const getMonth = (month: string) => {
+  switch (month) {
+    case "1":
+      return "Enero";
+    case "2":
+      return "Febrero";
+    case "3":
+      return "Marzo";
+    case "4":
+      return "Abril";
+    case "5":
+      return "Mayo";
+    case "6":
+      return "Junio";
+    case "7":
+      return "Julio";
+    case "8":
+      return "Agosto";
+    case "9":
+      return "Septiembre";
+    case "10":
+      return "Octubre";
+    case "11":
+      return "Noviembre";
+    case "12":
+      return "Diciembre";
+  }
+};
+
 type SalesWithDebtType = {
   seller: Seller;
   debt: number;
@@ -107,14 +136,15 @@ function Home({
   return (
     <div className="flex-1 flex-col h-full overflow-y-auto p-20">
       <div>
-        <div className="flex flex-1 h-full flex-row">
-          <div className="flex flex-1 max-w-lg overflow-hidden">
-            <div className="flex flex-1 flex-col items-center p-10">
-              <MonthSalesChart queryData={monthSales} />
-            </div>
+        <div className="flex flex-1 h-full flex-row gap-10">
+          <div className="flex flex-1 flex-col items-center p-5 border rounded-xl gap-5">
+            <h1 className="text-xl">
+              Ventas diarias de {getMonth(moment().month().toString())}
+            </h1>
+            <MonthSalesChart queryData={monthSales} />
           </div>
-          <div className="flex flex-1 flex-col max-w-lg overflow-hidden ">
-            <h1 className="text-center text-2xl">Juegos mas vendidos</h1>
+          <div className="flex flex-1 flex-col max-w-lg overflow-hidden border rounded-xl gap-5 p-5">
+            <h1 className="text-center text-xl">Juegos mas vendidos</h1>
             <GamesChart
               series={[
                 totals.quiniela,
@@ -128,11 +158,11 @@ function Home({
             />
           </div>
         </div>
-        <div className="flex flex-1 flex-row">
-          <div className="flex flex-1 flex-col max-w-lg overflow-hidden p-10">
+        <div className="flex flex-1 flex-row mt-10 gap-10">
+          <div className="flex  flex-col overflow-hidden p-10 rounded-xl">
             {/* <DebtSellersChart queryData={salesWithDebts} /> */}
           </div>
-          <div className="flex flex-1 flex-col max-w-lg overflow-hidden p-10"></div>
+          {/* <div className="flex flex-1 flex-col overflow-hidden p-10 max-w-lg "></div> */}
         </div>
       </div>
     </div>

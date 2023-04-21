@@ -1,8 +1,6 @@
 import ReactApexChart from "react-apexcharts";
 import moment from "moment";
-import React from "react";
 import { ApexOptions } from "apexcharts";
-import { Sale } from "../../utils/interfaces";
 
 type queryDataType = {
   date: string;
@@ -52,7 +50,7 @@ export const MonthSalesChart: (props: {
       size: 5,
     },
     title: {
-      text: "Ventas del mes",
+      // text: "Ventas del mes",
       align: "left",
     },
     xaxis: {
@@ -82,7 +80,7 @@ export const MonthSalesChart: (props: {
       options={options}
       series={series}
       type="line"
-      width={400}
+      width={800}
       height={320}
     />
   );
