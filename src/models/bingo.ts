@@ -9,19 +9,15 @@ import { Schema, ZodDate } from "zod";
 })
 class Bingo {
   @Prop({ type: String })
-  contest_date: string;
+  fecha_sorteo: string;
   @Prop({ type: String })
-  contest_number: string;
+  sorteo: string;
   @Prop({ type: String })
-  price: string;
+  precio: string;
   @Prop({ type: String })
-  game: string;
+  juego: string;
   @Prop({ type: String })
-  cards: string;
-  @Prop({ type: String })
-  returned_cards: string;
-  @Prop({ type: String })
-  dealt_cards: string;
+  cartones: string;
 }
 
 export default getModelForClass(Bingo);

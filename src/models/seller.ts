@@ -8,11 +8,10 @@ import { boolean } from "zod";
   },
 })
 class Seller {
-  @Prop({ type: String })
+  @Prop({ type: String, unique: true })
   id_seller: string;
-  @Prop({ type: String })
+  @Prop({ type: String, unique: true })
   machine_number: string;
-
   @Prop({ type: String })
   name: string;
 
@@ -24,6 +23,9 @@ class Seller {
 
   @Prop({ type: String })
   phone: string;
+
+  @Prop({ type: String })
+  address: string;
 
   @Prop({
     type: Object,

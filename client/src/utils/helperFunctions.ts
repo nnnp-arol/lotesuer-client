@@ -68,7 +68,31 @@ const gamesValuesAccumulator: gamesValuesAccumulatorType = (arr) => {
   return { quiniela, quini6, loto, loto5, brinco, poceada, express };
 };
 
+const convertVal: (
+  num: string | undefined,
+  percent?: string | undefined,
+  isFloat?: boolean | undefined
+) => number = (num, percent = "", isFloat = true) => {
+  if (!!num) {
+    if (isFloat) {
+      if (!!percent) {
+        const rawPercent = (parseFloat(num) * parseFloat(percent)) / 100;
+        return parseFloat(num) - rawPercent;
+      }
+      return parseFloat(num);
+    } else {
+      if (!!percent) {
+        const rawPercent = (parseInt(num) * parseInt(percent)) / 100;
+        return parseInt(num) - rawPercent;
+      }
+      return parseInt(num);
+    }
+  }
+  return 0;
+};
+
 export const helperFunctions = {
   totalAccumulator,
   gamesValuesAccumulator,
+  convertVal,
 };

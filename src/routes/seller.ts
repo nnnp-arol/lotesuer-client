@@ -2,10 +2,29 @@ import { publicProcedure, router } from "../trpc";
 import { z } from "zod";
 import Seller from "../models/seller";
 
-const getSellers = publicProcedure.query(async () => {
-  const sellers = await Seller.find();
-  return sellers;
-});
+const getSellers = publicProcedure
+  .input(
+    z.object({
+      searchBy: z.string(),
+    })
+  )
+  .query(async ({ input }) => {
+    if (!!input.searchBy) {
+      const convertSearch = parseInt(input.searchBy);
+      if (convertSearch >= 0) {
+        const sellers = await Seller.find({
+          id_seller: { $regex: input.searchBy },
+        });
+        return sellers;
+      }
+      const sellers = await Seller.find({
+        last_name: { $regex: input.searchBy },
+      });
+      return sellers;
+    }
+    const sellers = await Seller.find();
+    return sellers;
+  });
 
 const createSeller = publicProcedure
   .input(

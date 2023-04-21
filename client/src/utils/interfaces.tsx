@@ -19,6 +19,8 @@ export interface Percent {
 
 export interface Seller {
   _id: string;
+  machine_number: string;
+  address: string;
   id_seller: string;
   name: string;
   last_name: string;
@@ -75,13 +77,11 @@ export interface GamesFields {
 
 export interface Bingo {
   _id?: string;
-  contest_date: string;
-  contest_number: string;
-  price: string;
-  game: string;
-  cards: string;
-  returned_cards: string;
-  dealt_cards: string;
+  fecha_sorteo: string;
+  sorteo: string;
+  precio: string;
+  juego: string;
+  cartones: string;
   createdAt?: string;
   updatedAt?: string;
 }
@@ -90,12 +90,13 @@ export interface BingoSale {
   _id?: string;
   bingo?: string;
   seller?: string;
-  deliver_date?: string;
-  balance: string;
-  contest_number: string;
-  delivered_cards: string;
-  returned_cards: string;
-  sold: string;
+  sorteo: string;
+  fecha_sorteo: string;
+  juego: string;
+  cartones: string;
+  devolucion: string;
+  paga: string;
+  saldo: string;
   createdAt?: string;
   updatedAt?: string;
 }

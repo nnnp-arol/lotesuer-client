@@ -21,7 +21,11 @@ type MonthSalesType = {
   total: number;
 };
 
-function Home() {
+function Home({
+  setSelectedRoute,
+}: {
+  setSelectedRoute: (val: string) => void;
+}) {
   const [range] = useState({
     start: `${moment().format("YYYY")}-${moment().format("MM")}-01`,
     end: `${moment().format("YYYY")}-${moment().format(
@@ -65,7 +69,7 @@ function Home() {
     });
 
   useEffect(() => {
-    console.log(monthSales);
+    // console.log(monthSales);
     if (data?.length) {
       const {
         ventaTotal,
@@ -98,6 +102,8 @@ function Home() {
     }
   }, [data]);
 
+  setSelectedRoute("home");
+
   return (
     <div className="flex-1 flex-col h-full overflow-y-auto p-20">
       <div>
@@ -124,7 +130,7 @@ function Home() {
         </div>
         <div className="flex flex-1 flex-row">
           <div className="flex flex-1 flex-col max-w-lg overflow-hidden p-10">
-            <DebtSellersChart queryData={salesWithDebts} />
+            {/* <DebtSellersChart queryData={salesWithDebts} /> */}
           </div>
           <div className="flex flex-1 flex-col max-w-lg overflow-hidden p-10"></div>
         </div>

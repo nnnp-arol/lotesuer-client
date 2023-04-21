@@ -78,12 +78,14 @@ type PdfComponentPropsType = {
   data: Sale[] | undefined;
   startDate: string;
   endDate: string;
+  game: string;
 };
 
 export const PdfComponent: (props: PdfComponentPropsType) => JSX.Element = ({
   data,
   startDate,
   endDate,
+  game,
 }) => {
   const HeadTh: (props: HeadThPropsType) => JSX.Element = ({
     text,
@@ -194,6 +196,19 @@ export const PdfComponent: (props: PdfComponentPropsType) => JSX.Element = ({
                     {moment(endDate).format("DD-MM-YYYY")}
                   </Text>
                 </View>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                  }}
+                >
+                  <View style={{ width: 35 }}>
+                    <Text style={{ fontSize: 10, textDecoration: "underline" }}>
+                      juego:
+                    </Text>
+                  </View>
+                  <Text style={{ fontSize: 8, marginLeft: 2 }}>{game}</Text>
+                </View>
               </View>
               <View style={{ flex: 1 }}>
                 <Text style={{ marginTop: 10 }}>Lotesuer</Text>
@@ -213,24 +228,39 @@ export const PdfComponent: (props: PdfComponentPropsType) => JSX.Element = ({
                   borderBottomWidth: 1,
                 }}
               >
-                <HeadTh flx={0.3} text="Fecha" algn="left" />
-                <HeadTh text="Vendedor" algn="left" />
-                <HeadTh text="Quiniela" />
-                <HeadTh text="Quini6" />
-                <HeadTh text="Loto" />
-                <HeadTh text="Loto5" />
-                <HeadTh text="Brinco" />
-                <HeadTh text="Poceada" />
-                <HeadTh text="Express" />
-                <HeadTh text="Premios" />
-                <HeadTh text="Total" />
-                <HeadTh text="Paga" />
-                <HeadTh text="Saldo" algn="right" />
+                {game === "quiniela" ? (
+                  <>
+                    <HeadTh text="Fecha" algn="left" flx={0.1} />
+                    <HeadTh text="Vendedor" algn="left" flx={0.1} />
+                    <HeadTh text="Quiniela" algn="left" flx={0.1} />
+                    <HeadTh text="Quini6" algn="left" flx={0.1} />
+                    <HeadTh text="Loto" algn="left" flx={0.1} />
+                    <HeadTh text="Loto5" algn="left" flx={0.1} />
+                    <HeadTh text="Brinco" algn="left" flx={0.1} />
+                    <HeadTh text="Poceada" algn="left" flx={0.1} />
+                    <HeadTh text="Express" algn="left" flx={0.1} />
+                    <HeadTh text="Premios" algn="left" flx={0.1} />
+                    <HeadTh text="Total" algn="left" flx={0.1} />
+                    <HeadTh text="Paga" algn="left" flx={0.1} />
+                    <HeadTh text="Saldo" algn="left" flx={0.1} />
+                  </>
+                ) : (
+                  <>
+                    <HeadTh text="Fecha sorteo" flx={1} algn="left" />
+                    <HeadTh text="Sorteo" flx={1} algn="left" />
+                    <HeadTh text="Vendedor" flx={1} algn="left" />
+                    <HeadTh text="Cartones" flx={1} algn="left" />
+                    <HeadTh text="Devolucion" flx={1} algn="left" />
+                    <HeadTh text="Paga" flx={1} algn="left" />
+                    <HeadTh text="Saldo" flx={1} algn="left" />
+                  </>
+                )}
               </View>
               <View style={{ flexDirection: "column" }}>
                 {!!data
-                  ? data.map((sale, index) => (
+                  ? data.map((sale: any, index: number) => (
                       <View
+                        key={sale._id}
                         style={{
                           flexDirection: "row",
                           fontSize: 8,
@@ -238,23 +268,99 @@ export const PdfComponent: (props: PdfComponentPropsType) => JSX.Element = ({
                           paddingVertical: 1,
                         }}
                       >
-                        <BodyTd
-                          text={moment(sale.date).format("DD-MM-YYYY")}
-                          flx={0.3}
-                          algn="left"
-                        />
-                        <BodyTd text={sale.seller.id_seller} algn="left" />
-                        <BodyTd text={sale.games.quiniela} />
-                        <BodyTd text={sale.games.quini6} />
-                        <BodyTd text={sale.games.loto} />
-                        <BodyTd text={sale.games.loto5} />
-                        <BodyTd text={sale.games.brinco} />
-                        <BodyTd text={sale.games.poceada} />
-                        <BodyTd text={sale.games.express} />
-                        <BodyTd text={sale.totals.premios} />
-                        <BodyTd text={sale.totals.total} />
-                        <BodyTd text={sale.totals.paga} />
-                        <BodyTd text={sale.totals.saldo} algn="right" />
+                        {game === "quiniela" ? (
+                          <>
+                            <BodyTd
+                              text={moment(sale?.date).format("DD-MM-YY")}
+                              algn="left"
+                              flx={0.1}
+                            />
+                            <BodyTd
+                              text={sale?.seller?.id_seller}
+                              algn="left"
+                              flx={0.1}
+                            />
+                            <BodyTd
+                              text={sale?.games?.quiniela}
+                              algn="left"
+                              flx={0.1}
+                            />
+                            <BodyTd
+                              text={sale?.games?.quini6}
+                              algn="left"
+                              flx={0.1}
+                            />
+                            <BodyTd
+                              text={sale?.games?.loto}
+                              algn="left"
+                              flx={0.1}
+                            />
+                            <BodyTd
+                              text={sale?.games?.loto5}
+                              algn="left"
+                              flx={0.1}
+                            />
+                            <BodyTd
+                              text={sale?.games?.brinco}
+                              algn="left"
+                              flx={0.1}
+                            />
+                            <BodyTd
+                              text={sale?.games?.poceada}
+                              algn="left"
+                              flx={0.1}
+                            />
+                            <BodyTd
+                              text={sale?.games?.express}
+                              algn="left"
+                              flx={0.1}
+                            />
+                            <BodyTd
+                              text={sale?.totals?.premios}
+                              algn="left"
+                              flx={0.1}
+                            />
+                            <BodyTd
+                              text={sale?.totals?.total}
+                              algn="left"
+                              flx={0.1}
+                            />
+                            <BodyTd
+                              text={sale?.totals?.paga}
+                              algn="left"
+                              flx={0.1}
+                            />
+                            <BodyTd
+                              text={sale?.totals?.saldo}
+                              algn="left"
+                              flx={0.1}
+                            />
+                          </>
+                        ) : (
+                          <>
+                            <BodyTd
+                              text={moment(sale?.fecha_sorteo).format(
+                                "DD-MM-YY"
+                              )}
+                              flx={1}
+                              algn="left"
+                            />
+                            <BodyTd text={sale?.sorteo} flx={1} algn="left" />
+                            <BodyTd
+                              text={sale?.seller.id_seller}
+                              flx={1}
+                              algn="left"
+                            />
+                            <BodyTd text={sale?.cartones} flx={1} algn="left" />
+                            <BodyTd
+                              text={sale?.devolucion}
+                              flx={1}
+                              algn="left"
+                            />
+                            <BodyTd text={sale?.paga} flx={1} algn="left" />
+                            <BodyTd text={sale?.saldo} flx={1} algn="left" />
+                          </>
+                        )}
                       </View>
                     ))
                   : null}

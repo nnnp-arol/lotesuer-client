@@ -7,9 +7,13 @@ import { sellersRouter } from "./routes/seller";
 import { salesRouter } from "./routes/sales";
 import { bingoSalesRouter } from "./routes/bingoSales";
 import { bingoRouter } from "./routes/bingo";
+import { allGamesRouter } from "./routes/allGames";
+import { UserRouter } from "./routes/user";
+import { tokenRouter } from "./routes/token";
 import cors from "cors";
 import path from "path";
 import favicon from "express-favicon";
+import { authenticate } from "./middlewares/auth.middleware";
 
 const app = express();
 
@@ -18,12 +22,17 @@ const appRouter = router({
   sale: salesRouter,
   bingoSale: bingoSalesRouter,
   bingo: bingoRouter,
+  user: UserRouter,
+  token: tokenRouter,
+  allGames: allGamesRouter,
 });
 
-app.use(favicon(__dirname + "../client/public/lol.svg"));
+app.use(favicon(__dirname + "../client/public/lotesuer2.svg"));
 
 app.use(cors());
 app.use(morgan("dev"));
+
+app.use(authenticate);
 
 app.use(
   "/trpc",
