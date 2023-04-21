@@ -1,6 +1,5 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { trpc } from "../utils/trpc";
-import SellerCard from "./SellerCard";
 import SearchIcon from "@mui/icons-material/Search";
 import { FadeLoader, MoonLoader } from "react-spinners";
 import KeyboardDoubleArrowRightOutlinedIcon from "@mui/icons-material/KeyboardDoubleArrowRightOutlined";
