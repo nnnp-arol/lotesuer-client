@@ -54,7 +54,7 @@ export const DebtSellersChart: (props: {
           customIcons: [],
         },
       },
-      background: "white",
+      // background: "black",
       height: 350,
       type: "bar",
       events: {
@@ -69,7 +69,7 @@ export const DebtSellersChart: (props: {
         columnWidth: "45%",
         distributed: true,
         borderRadius: 4,
-        horizontal: false,
+        horizontal: true,
       },
     },
     dataLabels: {
