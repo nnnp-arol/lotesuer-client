@@ -17,10 +17,12 @@ const initialValues = {
 };
 type NavType = {
   setselectedScreen: (e: any) => void;
+  enabled: boolean;
 };
 
-export const Nav: React.FC<NavType> = ({ setselectedScreen }) => {
+export const Nav: React.FC<NavType> = ({ setselectedScreen, enabled }) => {
   const [tabs, setTabs] = useState(initialValues);
+  const [onlyIcon, setOnlyIcon] = useState(false);
   const [saleFeatures, setSaleFeatures] = useState({
     collapsed: false,
     selected: "quiniela",
@@ -35,53 +37,57 @@ export const Nav: React.FC<NavType> = ({ setselectedScreen }) => {
     setTabs({ ...initialValues, inicio: "activate" });
   }, []);
   return (
-    <div className="flex items-start pt-10 bg-black flex-col w-1/6">
-      <ul className="w-full mt-8 flex-col flex justify-center">
+    <div className="flex justify-start  bg-slate-900 flex-col w-1/6">
+      <ul className="w-full flex-col flex justify-center">
         <NavItem
           state={tabs.inicio}
-          icon={<HomeOutlinedIcon color="inherit" className={styles.icons} />}
+          // icon={<HomeOutlinedIcon color="inherit" className={styles.icons} />}
           link={
             <Link
               id="inicio"
-              to="/home"
+              to={enabled ? "/home" : "/"}
               onClick={(e) => {
-                setSaleFeatures({ ...saleFeatures, collapsed: false });
-
+                if (!enabled) {
+                  return;
+                }
                 handleTabs(e);
               }}
             >
-              Inicio
+              <HomeOutlinedIcon color="inherit" className={styles.icons} />
+              {!onlyIcon && "Inicio"}
             </Link>
           }
         />
         <NavItem
           state={tabs.vendedores}
-          icon={<PersonOutlineIcon color="inherit" className={styles.icons} />}
+          // icon={<PersonOutlineIcon color="inherit" className={styles.icons} />}
           link={
             <Link
               id="vendedores"
-              to="/sellers"
+              to={enabled ? "/sellers" : "/"}
               onClick={(e) => {
-                setSaleFeatures({ ...saleFeatures, collapsed: false });
+                if (!enabled) return;
                 handleTabs(e);
               }}
             >
-              Vendedores
+              <PersonOutlineIcon color="inherit" className={styles.icons} />
+              {!onlyIcon && "Vendedores"}
             </Link>
           }
         />
         <NavItem
           state={tabs.ventas}
-          icon={<PointOfSaleIcon color="inherit" className={styles.icons} />}
+          // icon={<PointOfSaleIcon color="inherit" className={styles.icons} />}
           link={
             <Link
-              to="/quiniela"
+              to={enabled ? "/quiniela" : "/"}
               style={{
                 color: saleFeatures.collapsed ? "#f8fafc" : "#9ca3af",
                 cursor: "pointer",
               }}
               id="quiniela"
               onClick={(e) => {
+                if (!enabled) return;
                 setTabs({ ...initialValues, quiniela: "active" });
                 setSaleFeatures({
                   ...saleFeatures,
@@ -89,67 +95,66 @@ export const Nav: React.FC<NavType> = ({ setselectedScreen }) => {
                 });
               }}
             >
-              Ventas
+              <PointOfSaleIcon color="inherit" className={styles.icons} />
+              {!onlyIcon && "Ventas"}
             </Link>
           }
         />
-        {saleFeatures.collapsed ? (
-          <>
-            <li
-              className="my-4 text-left text-lg flex justify-center"
-              style={{
-                color:
-                  saleFeatures.selected === "quiniela" ? "#f8fafc" : "#9ca3af",
-              }}
-            >
-              <Link
-                to="/quiniela"
-                id="quiniela"
-                onClick={(e) => {
-                  setSaleFeatures({ ...saleFeatures, selected: "quiniela" });
-                  handleTabs(e);
-                }}
-              >
-                - Quiniela
-              </Link>
-            </li>
-            <li
-              className="my-4 text-left text-lg flex justify-center"
-              style={{
-                color:
-                  saleFeatures.selected === "bingos" ? "#f8fafc" : "#9ca3af",
-              }}
-            >
-              <Link
-                to="/bingos"
-                id="bingos"
-                onClick={(e) => {
-                  setSaleFeatures({ ...saleFeatures, selected: "bingos" });
-                  handleTabs(e);
-                }}
-              >
-                - Bingos
-              </Link>
-            </li>
-            <div className="w-1/2 h-px bg-white ml-10 opacity-30"></div>
-          </>
-        ) : null}
+        <li
+          className="my-4 text-left text-lg flex justify-center"
+          style={{
+            color: saleFeatures.selected === "quiniela" ? "#f8fafc" : "#9ca3af",
+          }}
+        >
+          <Link
+            to={enabled ? "/quiniela" : "/"}
+            id="quiniela"
+            onClick={(e) => {
+              if (!enabled) return;
+              setSaleFeatures({ ...saleFeatures, selected: "quiniela" });
+              handleTabs(e);
+            }}
+          >
+            - Quiniela
+          </Link>
+        </li>
+        <li
+          className="my-4 text-left text-lg flex justify-center"
+          style={{
+            color: saleFeatures.selected === "bingos" ? "#f8fafc" : "#9ca3af",
+          }}
+        >
+          <Link
+            to={!!enabled ? "/bingos" : "/"}
+            id="bingos"
+            onClick={(e) => {
+              if (!enabled) return;
+              setSaleFeatures({ ...saleFeatures, selected: "bingos" });
+              handleTabs(e);
+            }}
+          >
+            - Bingos
+          </Link>
+        </li>
+        <div className="w-1/2 h-px bg-white ml-10 opacity-30"></div>
         <NavItem
           division={false}
           state={tabs.informes}
-          icon={
-            <TextSnippetOutlinedIcon color="inherit" className={styles.icons} />
-          }
+          // icon={<TextSnippetOutlinedIcon color="inherit" className={styles.icons} />}
           link={
             <Link
               id="informes"
-              to="/reports"
+              to={!!enabled ? "/reports" : "/"}
               onClick={(e) => {
-                setSaleFeatures({ ...saleFeatures, collapsed: false });
+                if (!enabled) return;
                 handleTabs(e);
               }}
             >
-              Informes
+              <TextSnippetOutlinedIcon
+                color="inherit"
+                className={styles.icons}
+              />
+              {!onlyIcon && "Informes"}
             </Link>
           }
         />

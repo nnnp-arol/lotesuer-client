@@ -33,27 +33,48 @@ const getSaleByRange = publicProcedure
     })
   )
   .query(async ({ input }) => {
-    if (!input.seller) {
-      console.log("sin celler");
+    const { end, seller, start } = input;
+    if (!end && !seller && !start) {
+      return;
     }
-    const sales = !input.seller
-      ? await Sale.find({
-          date: {
-            $gte: input.start,
-            $lte: input.end,
-          },
-        })
-          .populate({ path: "seller" })
-          .sort({ date: "asc" })
-      : await Sale.find({
-          seller: input.seller,
-          date: {
-            $gte: input.start,
-            $lte: input.end,
-          },
-        })
-          .sort({ date: "asc" })
-          .populate({ path: "seller" });
+    if (!seller) {
+      if (start === end) {
+        const sales = await Sale.find({ date: start })
+          .populate({
+            path: "seller",
+          })
+          .sort({ date: "asc" });
+        return sales;
+      }
+      const sales = await Sale.find({
+        date: {
+          $gte: start,
+          $lte: end,
+        },
+      })
+        .populate({ path: "seller" })
+        .sort({ date: "asc" });
+      return sales;
+    }
+    if (start === end) {
+      const sales = await Sale.find({
+        date: start,
+        seller: seller,
+      })
+        .populate({ path: "seller" })
+        .sort({ date: "asc" });
+      return sales;
+    }
+    const sales = await Sale.find({
+      seller: seller,
+      date: {
+        $gte: start,
+        $lte: end,
+      },
+    })
+      .sort({ date: "asc" })
+      .populate({ path: "seller" });
+
     return sales;
   });
 

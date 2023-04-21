@@ -7,15 +7,15 @@ import moment from "moment";
 const createBingoSale = publicProcedure
   .input(
     z.object({
-      deliver_date: z.string(),
       bingo: z.string(),
       seller: z.string(),
-      contest_number: z.string(),
-      game: z.string(),
-      delivered_cards: z.string(),
-      returned_cards: z.string(),
-      sold: z.string(),
-      balance: z.string(),
+      fecha_sorteo: z.string(),
+      sorteo: z.string(),
+      juego: z.string(),
+      cartones: z.string(),
+      devolucion: z.string(),
+      paga: z.string(),
+      saldo: z.string(),
     })
   )
   .mutation(async ({ input }) => {
@@ -24,19 +24,19 @@ const createBingoSale = publicProcedure
     const existSale = await BingoSale.find({
       bingo: input.bingo,
       seller: input.seller,
-      contest_number: input.contest_number,
+      sorteo: input.sorteo,
     });
     if (existSale.length) throw new Error("Venta existente");
     const newSale = new BingoSale({
-      deliver_date: input.deliver_date,
+      fecha_sorteo: input.fecha_sorteo,
       bingo: input.bingo,
       seller: input.seller,
-      contest_number: input.contest_number,
-      game: input.game,
-      delivered_cards: input.delivered_cards,
-      returned_cards: input.returned_cards,
-      sold: input.sold,
-      balance: input.balance,
+      sorteo: input.sorteo,
+      juego: input.juego,
+      cartones: input.cartones,
+      devolucion: input.devolucion,
+      saldo: input.saldo,
+      paga: input.paga,
     });
     await newSale.save();
     return newSale;
@@ -45,14 +45,14 @@ const createBingoSale = publicProcedure
 const getSaleByGameAndContest = publicProcedure
   .input(
     z.object({
-      game: z.string(),
-      contest_number: z.string(),
+      juego: z.string(),
+      sorteo: z.string(),
     })
   )
   .query(async ({ input }) => {
     const bingoSales = await BingoSale.find({
-      game: input.game,
-      contest_number: input.contest_number,
+      juego: input.juego,
+      sorteo: input.sorteo,
     });
     return bingoSales;
   });
@@ -60,29 +60,55 @@ const getSaleByGameAndContest = publicProcedure
 const getAllBingosByGame = publicProcedure
   .input(
     z.object({
-      game: z.string(),
+      juego: z.string(),
       start: z.string(),
       end: z.string(),
     })
   )
   .query(async ({ input }) => {
+    const { end, juego, start } = input;
+    console.log(end, juego, start);
     if (!!input?.start) {
-      const bingoSales = await Bingo.find({
-        date: { $gte: input.start, $lte: input.end },
-        game: input.game,
+      const bingoSales = await BingoSale.find({
+        fecha_sorteo: { $gte: input.start, $lte: input.end },
+        juego: input.juego,
       });
       return bingoSales;
     }
-    if (!!input?.game) {
-      const bingosSales = await Bingo.find({ game: input.game });
+    if (!!input?.juego) {
+      const bingosSales = await BingoSale.find({ juego: input.juego });
       return bingosSales;
     }
-    const bingosSales = await Bingo.find();
+    const bingosSales = await BingoSale.find();
     return bingosSales;
+  });
+
+const updateBingoSale = publicProcedure
+  .input(
+    z.object({
+      id: z.string(),
+      cartones: z.string(),
+      devolucion: z.string(),
+      paga: z.string(),
+      saldo: z.string(),
+    })
+  )
+  .mutation(async ({ input }) => {
+    const foundSale = await BingoSale.updateOne(
+      { _id: input.id },
+      {
+        cartones: input.cartones,
+        devolucion: input.devolucion,
+        saldo: input.saldo,
+        paga: input.paga,
+      }
+    );
+    return foundSale;
   });
 
 export const bingoSalesRouter = router({
   getAllBingosByGame,
   createBingoSale,
   getSaleByGameAndContest,
+  updateBingoSale,
 });

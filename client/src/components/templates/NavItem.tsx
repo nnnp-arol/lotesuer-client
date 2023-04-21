@@ -15,13 +15,13 @@ const variants = {
 };
 
 type NavItemType = {
-  icon: ReactNode;
+  // icon: ReactNode;
   link: ReactElement;
   state: string;
   division?: boolean;
 };
 export const NavItem: React.FC<NavItemType> = ({
-  icon,
+  // icon,
   link,
   state,
   division = true,
@@ -32,9 +32,9 @@ export const NavItem: React.FC<NavItemType> = ({
         <motion.div
           variants={variants}
           animate={state}
-          whileHover={{ opacity: 0.7 }}
+          whileHover={{ opacity: 0.5 }}
         >
-          {icon}
+          {/* {icon} */}
           {link}
         </motion.div>
       </li>
